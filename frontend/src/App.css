@@ -1,7 +1,21 @@
+
 #root {
-  max-width: 1280px;
+  max-width: 1440px;
+  height: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+main {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  height: calc(100vh - 91px);
+}
+
 

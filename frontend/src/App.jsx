@@ -1,6 +1,7 @@
 
 
 import './App.css'
+import Dashboard from './pages/Dashboard/Dashboard'
 
 function App() {
  
@@ -8,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-       
+       <Dashboard/>
       </div>
       
      
