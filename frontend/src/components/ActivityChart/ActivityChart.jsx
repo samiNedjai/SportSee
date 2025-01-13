@@ -2,14 +2,44 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import "./activityChart.css"
 
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const kilogram = payload.find((item) => item.dataKey === "kilogram").value;
+    const calories = payload.find((item) => item.dataKey === "calories").value;
+
+    return (
+      <div style={{
+        backgroundColor: "#E60000",
+        color: "#FFFFFF",
+        padding: "10px",
+        borderRadius: "5px",
+        fontSize: "12px",
+        lineHeight: "20px",
+        textAlign: "center",
+      }}>
+        <p>{kilogram}kg</p>
+        <p>{calories}Kcal</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const ActivityChart = ({ data }) => {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
 
+  const processedData = data.map((session, index) => ({
+    ...session,
+    index: index + 1, // Ajoute un numéro de jour
+  }));
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data} barGap={8} barSize={7}>
+    <ResponsiveContainer width="100%" height={320}>
+      <BarChart data={processedData} barGap={10} barSize={7}>
         {/* Titre */}
         <text
           x={0}
@@ -30,7 +60,7 @@ const ActivityChart = ({ data }) => {
         {/* Grille et axes */}
         <CartesianGrid strokeDasharray="3 3" opacity={0.5} vertical={false} />
         <XAxis
-          dataKey="day"
+          dataKey="index"
           tickLine={false}
           axisLine={false}
           tick={{ fontSize: 12, fill: '#9B9EAC' }}
@@ -44,30 +74,21 @@ const ActivityChart = ({ data }) => {
 
         {/* Légende personnalisée */}
         <Legend
+        y={17}
+        x={17}
           verticalAlign="top"
+          className='recharts-default-legend'
           align="right"
           iconType="circle"
           formatter={(value) => {
             if (value === 'kilogram') return <span style={{ color: '#74798C', fontFamily:"roboto",fontSize:"14px", fontweight:"500" }}>Poids (kg)</span>;
-            if (value === 'calories') return <span style={{ color: '#74798C', fontFamily:"roboto",fontSize:"14px", fontweight:"500" }}>Calories brûlées (kCal)</span>;
+            if (value === 'calories') return <span style={{ color: '#74798C', fontFamily:"roboto",fontSize:"14px", fontweight:"500"}}>Calories brûlées (kCal)</span>;
             return value;
           }}
         />
 
         {/* Tooltip personnalisé */}
-        <Tooltip
-          contentStyle={{
-            backgroundColor: "#FF0101",
-            color: "#FFF",
-            fontSize: "12px",
-            borderRadius: "5px",
-          }}
-          formatter={(value, name) => {
-            if (name === "kilogram") return [`${value}kg`, "Poids"];
-            if (name === "calories") return [`${value}kCal`, "Calories brûlées"];
-          }}
-        />
-
+        <Tooltip content={<CustomTooltip />} />
         {/* Barres */}
         <Bar dataKey="kilogram" fill="#282D30" radius={[10, 10, 0, 0]} />
         <Bar dataKey="calories" fill="#E60000" radius={[10, 10, 0, 0]} />
