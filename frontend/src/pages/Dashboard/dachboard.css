@@ -83,6 +83,12 @@ text-align: start;
 .dashboard-charts-sessions {
     grid-area: 3 / 1 / 5 / 2;
     background: #ff0000;
-    width:260px ;
-    height: 260px;
+    width: 258px ;
+    height:263px;
+}
+.dashboard-charts-performance {
+    grid-area: 3 / 2 / 5 / 3;
+    background: #282d30;
+    width:258px ;
+    height: 263px;
 }

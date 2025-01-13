@@ -4,7 +4,7 @@ import swimming from "../../assets/swimming.svg";
 import yoga from "../../assets/yoga.svg";
 import "./barnavvertical.css";
 
-function BarnavVertical() {
+export default function  BarnavVertical() {
   return (
     <aside className=" BarnavVertical">
       <nav className="BarnavVertical-nav">
@@ -26,4 +26,4 @@ function BarnavVertical() {
   );
 }
 
-export default BarnavVertical;
+

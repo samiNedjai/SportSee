@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const ActivityChart = ({ data }) => {
+export default function  ActivityChart ({ data }) {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
@@ -97,4 +97,4 @@ const ActivityChart = ({ data }) => {
   );
 };
 
-export default ActivityChart;
+

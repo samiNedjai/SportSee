@@ -1,0 +1,10 @@
+.performance-radar {
+    background-color: #282D30;
+    border-radius: 10px;
+    height: 258px;
+    width: 258px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

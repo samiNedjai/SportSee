@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 
-const AverageSessionChart = ({ data }) => {
+export default function AverageSessionChart ({ data }) {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
@@ -83,7 +83,8 @@ const AverageSessionChart = ({ data }) => {
           activeDot={{
             stroke: "#FFFFFF",
             strokeOpacity: "50%",
-            strokeWidth: 10,
+            strokeWidth: 0,
+           
           }}
         />
         <Tooltip
@@ -100,4 +101,4 @@ const AverageSessionChart = ({ data }) => {
   );
 };
 
-export default AverageSessionChart;
+

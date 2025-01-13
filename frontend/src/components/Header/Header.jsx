@@ -1,7 +1,7 @@
 import logo from '../../assets/header-logo.svg';
 import "./header.css"
 
-function Header () {
+export default function Header () {
   return (
     <header className="header">
     <nav className="header-nav">
@@ -25,4 +25,3 @@ function Header () {
   )
 }
 
-export default Header
