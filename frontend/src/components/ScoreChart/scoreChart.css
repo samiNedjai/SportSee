@@ -1,0 +1,43 @@
+.score-chart {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 219px;
+     height: 218px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .score-chart-title {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #20253A;
+    text-align: left; 
+    margin:24px 0 10px 30px ;
+  }
+  
+  .score-chart-container {
+    width: 100%; 
+    height: 100%; 
+    position: relative;
+  }
+  .score-chart-label {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    fill: #20253A;
+  }
+  
+  .score-chart-percentage {
+    font-size: 26px;
+    font-weight: 700;
+    fill: #282D30;
+  }
+  
+  .score-chart-subtext {
+    font-size: 16px;
+    font-weight: 500;
+    fill: #74798C;
+  }
+  

@@ -10,10 +10,11 @@ import {
   fetchMockUserPerformance
 } from "../../services/mockService";
 import "./dachboard.css";
+import ScoreChart from "../../components/ScoreChart/ScoreChart";
 
 
 export default function Dashboard() {
-  const userId = 18;
+  const userId = 12;
   const userData = fetchMockUserData(userId);
   const userActivity = fetchMockUserActivity(userId);
   const userAverageSessions = fetchMockUserAverageSessions(userId);
@@ -38,14 +39,17 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="dashboard-charts">
-            <div className="dashboard-charts-activity dashboard-charts-all">
+            <div className="dashboard-activityChart dashboard-charts-all">
               <ActivityChart data={userActivity.sessions} />
             </div>
-            <div className="dashboard-charts-sessions dashboard-charts-all">
+            <div className="dashboard-averageSession dashboard-charts-all">
             <AverageSessionChart data={userAverageSessions.sessions} />
             </div>
-            <div className="dashboard-charts-performance dashboard-charts-all">
+            <div className="dashboard-performanceRadar dashboard-charts-all">
               <PerformanceRadar data={userPerformance} />
+            </div>
+            <div className="dashboard-scoreChart dashboard-charts-all">
+              <ScoreChart score={userData.todayScore || userData.score} />
             </div>
           </div>
         </section>
