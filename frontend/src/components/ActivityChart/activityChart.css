@@ -3,7 +3,7 @@
     font-weight: 500;
   }
   ul.recharts-default-legend {
-    margin: 30px;
+    margin-bottom: 30px;
   }
   .recharts-tooltip-label {
     font-weight: bold;

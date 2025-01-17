@@ -38,8 +38,8 @@ export default function  ActivityChart ({ data }) {
   }));
 
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <BarChart data={processedData} barGap={10} barSize={7}>
+    <ResponsiveContainer width="90%" height="80%">
+      <BarChart data={processedData} barGap={12} barSize={8}>
         {/* Titre */}
         <text
           x={0}
@@ -47,10 +47,10 @@ export default function  ActivityChart ({ data }) {
           textAnchor="left"
           style={{
             fontfamily: "Roboto",
-            fontsize:"15px",
+            fontsize:16,
             fontstyle: "normal",
-            fontweight:"500",
-            lineheight: "24px",
+            fontweight:500,
+            lineheight: 24,
             fill: "#20253A",
           }}
         >
@@ -62,24 +62,27 @@ export default function  ActivityChart ({ data }) {
         <XAxis
           dataKey="index"
           tickLine={false}
-          axisLine={false}
-          tick={{ fontSize: 12, fill: '#9B9EAC' }}
+          axisLine={{ stroke: "#DEDEDE" }}
+          tick={{ fontSize: 14, fill: '#9B9EAC', fontFamily:"roboto",dy: 16 }}
         />
         <YAxis
           orientation="right" 
           tickLine={false}
           axisLine={false}
-          tick={{ fontSize: 12, fill: '#9B9EAC' }}
+           type="number"
+          tick={{ fontSize: 14, fill: '#9B9EAC' }}
         />
 
         {/* Légende personnalisée */}
+        
         <Legend
         y={17}
         x={17}
           verticalAlign="top"
-          className='recharts-default-legend'
+          // className='recharts-default-legend'
           align="right"
           iconType="circle"
+          wrapperStyle={{ paddingBottom: 30 }}
           formatter={(value) => {
             if (value === 'kilogram') return <span style={{ color: '#74798C', fontFamily:"roboto",fontSize:"14px", fontweight:"500" }}>Poids (kg)</span>;
             if (value === 'calories') return <span style={{ color: '#74798C', fontFamily:"roboto",fontSize:"14px", fontweight:"500"}}>Calories brûlées (kCal)</span>;
@@ -90,8 +93,12 @@ export default function  ActivityChart ({ data }) {
         {/* Tooltip personnalisé */}
         <Tooltip content={<CustomTooltip />} />
         {/* Barres */}
-        <Bar dataKey="kilogram" fill="#282D30" radius={[10, 10, 0, 0]} />
-        <Bar dataKey="calories" fill="#E60000" radius={[10, 10, 0, 0]} />
+        <Bar 
+        dataKey="kilogram" 
+        fill="#282D30" 
+        radius={[10, 10, 0, 0]} />
+        <Bar 
+        dataKey="calories" fill="#E60000" radius={[10, 10, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

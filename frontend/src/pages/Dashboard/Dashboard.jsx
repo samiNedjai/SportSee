@@ -1,25 +1,77 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
 import BarnavVertical from "../../components/BarnavVertical/BarnavVertical";
 import AverageSessionChart from "../../components/AverageSessionChart/AverageSessionChart"
 import Header from "../../components/Header/Header";
 import PerformanceRadar from "../../components/PerformanceRadar/PerformanceRadar.JSX";
-import {
-  fetchMockUserData,
-  fetchMockUserActivity,
-  fetchMockUserAverageSessions,
-  fetchMockUserPerformance
-} from "../../services/mockService";
-import "./dachboard.css";
 import ScoreChart from "../../components/ScoreChart/ScoreChart";
+import KeyData from "../../components/KeyData/KeyData";
+import {
+  fetchUserData,
+  fetchUserActivity,
+  fetchUserAverageSessions,
+  fetchUserPerformance,
+} from "../../services/apiService";
+import "./dachboard.css";
+
 
 
 export default function Dashboard() {
-  const userId = 12;
-  const userData = fetchMockUserData(userId);
-  const userActivity = fetchMockUserActivity(userId);
-  const userAverageSessions = fetchMockUserAverageSessions(userId);
-  const userPerformance = fetchMockUserPerformance(userId);
-  console.log(userActivity);
+  const { userId } = useParams()
+  const [userData, setUserData] = useState(null);
+  const [userActivity, setUserActivity] = useState(null);
+  const [userAverageSessions, setUserAverageSessions] = useState(null);
+  const [userPerformance, setUserPerformance] = useState(null);
+  const [userNotFound, setUserNotFound] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await fetchUserData(userId);
+        if (!userData) {
+          setUserNotFound(true);
+        } else {
+          setUserNotFound(false);
+          setUserData(userData);
+          setUserActivity(await fetchUserActivity(userId));
+          setUserAverageSessions(await fetchUserAverageSessions(userId));
+          setUserPerformance(await fetchUserPerformance(userId));
+        }
+      } catch (error) {
+        setUserNotFound(true);
+      }
+    };
+    fetchData();
+  }, [userId]);
+  if (userNotFound) {
+    return (
+      <div>
+        <Header />
+        <main className="main">
+          <BarnavVertical />
+           <div className="error-container">
+          <p>Utilisateur non trouvé. Veuillez vérifier l'identifiant.</p>
+        </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
+    return (
+      <div>
+        <Header />
+        <main className="main">
+          <BarnavVertical />
+          <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p style={{ marginLeft: "10px" }}>Chargement...</p>
+        </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -29,7 +81,7 @@ export default function Dashboard() {
         <section className="dashboard">
           <div className="dashboard-header">
             <h1 className="dashboard-header-greeting">
-              Bonjour{" "}
+              Bonjour{"   "}
               <span className="dashboard-header-name">
                 {userData.userInfos.firstName}
               </span>
@@ -51,6 +103,10 @@ export default function Dashboard() {
             <div className="dashboard-scoreChart dashboard-charts-all">
               <ScoreChart score={userData.todayScore || userData.score} />
             </div>
+            <div className="key-data-containeur dashboard-charts-all  ">
+      
+            <KeyData keyData={userData.keyData} />
+          </div>
           </div>
         </section>
       </main>

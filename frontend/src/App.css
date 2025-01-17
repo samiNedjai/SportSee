@@ -1,8 +1,8 @@
 
 #root {
   max-width: 1440px;
-  height: 100%;
-  margin: 0 auto;
+  max-height: 1024px;
+  margin: 0;
   padding: 0;
   text-align: center;
 }
@@ -15,7 +15,7 @@ main {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  height: calc(100vh - 91px);
+  height: 80vh;
 }
 
 
