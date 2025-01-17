@@ -1,8 +1,20 @@
+/**
+ * @file AverageSessionChart.jsx
+ * @description Composant React qui affiche un graphique en courbes représentant la durée moyenne des sessions d'activité d'un utilisateur.
+ * Ce graphique montre les données des sessions sur une semaine, avec des jours abrégés comme axes X.
+ */
 import React from 'react';
 import { LineChart, Line, XAxis,YAxis, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
 import './averageSessionChart.css';
 
-// Tooltip personnalisé
+/**
+ * Tooltip personnalisé pour afficher la durée moyenne d'une session en minutes.
+ * 
+ * @param {Object} props - Propriétés du tooltip.
+ * @param {boolean} props.active - Indique si le tooltip est actif.
+ * @param {Array} props.payload - Contient les données affichées dans le tooltip.
+ * @returns {JSX.Element|null} Retourne un tooltip personnalisé ou `null` si aucune donnée n'est disponible.
+ */
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -26,13 +38,30 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-
+/**
+ * Composant principal pour afficher un graphique en courbes représentant la durée moyenne des sessions.
+ * 
+ * @param {Object} props - Propriétés du composant.
+ * @param {Array} props.data - Données des sessions d'activité.
+ * Chaque élément du tableau doit inclure `day` (1-7) et `sessionLength` (durée en minutes).
+ * 
+ * @example
+ * const data = [
+ *   { day: 1, sessionLength: 30 },
+ *   { day: 2, sessionLength: 45 },
+ * ];
+ * 
+ * <AverageSessionChart data={data} />
+ * 
+ * @returns {JSX.Element} Retourne le graphique en courbes.
+ */
 export default function AverageSessionChart ({ data }) {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
 
-  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']; // Jours abrégés
+  // Jours abrégés pour l'axe X
+  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']; 
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -40,12 +69,14 @@ export default function AverageSessionChart ({ data }) {
         data={data}
         margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
       >
+         {/* Gradient pour la ligne */}
         <defs>
           <linearGradient id="lineGradient">
             <stop offset="0%" stopColor="#FFFFFF" stopOpacity="30%" />
             <stop offset="100%" stopColor="#FFFFFF" stopOpacity="100%" />
           </linearGradient>
         </defs>
+          {/* Titre */}
         <text
           x={10}
           y={30}
@@ -60,6 +91,7 @@ export default function AverageSessionChart ({ data }) {
         >
           Durée moyenne des sessions
         </text>
+         {/* Axe X */}
         <XAxis
           dataKey="day"
           axisLine={false}
@@ -69,11 +101,13 @@ export default function AverageSessionChart ({ data }) {
           tickMargin={10}
           tickFormatter={(day) => days[day - 1]}
         />
+         {/* Axe Y (caché) */}
         <YAxis
           dataKey="sessionLength"
           hide={true}
           domain={["dataMin -20", "dataMax + 50"]}
         />
+        {/* Ligne */}
         <Line
           dataKey="sessionLength"
           type="natural"
@@ -87,6 +121,7 @@ export default function AverageSessionChart ({ data }) {
            
           }}
         />
+         {/* Tooltip */}
         <Tooltip
           content={CustomTooltip}
           cursor={{

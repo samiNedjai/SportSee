@@ -1,3 +1,11 @@
+/**
+ * @file apiService.js
+ * @description Service pour la récupération des données utilisateur via API.
+ * Fournit des fonctions pour obtenir les informations utilisateur, les activités,
+ * les sessions moyennes et les performances à partir de l'API ou des données mockées en cas d'échec.
+ * 
+ */
+
 import {
   fetchMockUserData,
   fetchMockUserActivity,
@@ -6,6 +14,13 @@ import {
 } from "./mockService";
 
 const BASE_URL = 'http://localhost:3000';
+
+/**
+ * Récupère les données utilisateur depuis l'API ou les données mockées en cas d'erreur.
+ * 
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {Promise<Object>} - Les données utilisateur.
+ */
 
 export const fetchUserData = async (userId) => {
   try {
@@ -20,6 +35,12 @@ export const fetchUserData = async (userId) => {
   }
 };
 
+/**
+ * Récupère les activités utilisateur depuis l'API ou les données mockées en cas d'erreur.
+ * 
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {Promise<Object>} - Les activités utilisateur.
+ */
 export const fetchUserActivity = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/user/${userId}/activity`);
@@ -33,6 +54,12 @@ export const fetchUserActivity = async (userId) => {
   }
 };
 
+/**
+ * Récupère les sessions moyennes utilisateur depuis l'API ou les données mockées en cas d'erreur.
+ * 
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {Promise<Object>} - Les sessions moyennes utilisateur.
+ */
 export const fetchUserAverageSessions = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/user/${userId}/average-sessions`);
@@ -46,6 +73,12 @@ export const fetchUserAverageSessions = async (userId) => {
   }
 };
 
+/**
+ * Récupère les performances utilisateur depuis l'API ou les données mockées en cas d'erreur.
+ * 
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {Promise<Object>} - Les performances utilisateur.
+ */
 export const fetchUserPerformance = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/user/${userId}/performance`);

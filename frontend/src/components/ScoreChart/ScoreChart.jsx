@@ -1,7 +1,25 @@
+/**
+ * @file ScoreChart.jsx
+ * @description Composant React pour afficher un graphique radial représentant le score quotidien d'un utilisateur.
+ * 
+ */
 import React from 'react';
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import './scoreChart.css';
 
+/**
+ * Composant `ScoreChart`
+ * 
+ * @param {Object} props - Propriétés du composant.
+ * @param {number} props.score - Le score de l'utilisateur, compris entre 0 et 1.
+ * 
+ * @returns {JSX.Element} Un graphique radial représentant le score de l'utilisateur.
+ * 
+ * @example
+ * // Exemple d'utilisation :
+ * const userScore = 0.85; // 85%
+ * <ScoreChart score={userScore} />
+ */
 export default function ScoreChart ({ score }) {
   // Préparer les données pour le graphique
   const data = [

@@ -1,6 +1,21 @@
+/**
+ * @file Header.jsx
+ * @description Composant React pour l'en-tête de l'application SportSee.
+ * Il inclut le logo de l'application et une barre de navigation avec plusieurs liens.
+ * 
+ */
+
 import logo from '../../assets/header-logo.svg';
 import "./header.css"
 
+/**
+ * Composant `Header` - En-tête principal de l'application.
+ * 
+ * @returns {JSX.Element} Une barre de navigation horizontale contenant le logo et des liens.
+ * 
+ * @example
+ * <Header />
+ */
 export default function Header () {
   return (
     <header className="header">

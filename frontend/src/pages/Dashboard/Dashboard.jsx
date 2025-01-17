@@ -1,3 +1,12 @@
+
+/**
+ * @file Dashboard.jsx
+ * @description Composant de la page principale affichant le tableau de bord d'un utilisateur.
+ * Affiche les données d'activité, de performance, de sessions moyennes et de score global.
+ * En cas d'erreur ou de chargement, des messages appropriés sont affichés.
+ * 
+ */
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
@@ -15,7 +24,18 @@ import {
 } from "../../services/apiService";
 import "./dachboard.css";
 
-
+/**
+ * Page `Dashboard`
+ * 
+ * @returns {JSX.Element} Composant de la page tableau de bord utilisateur.
+ * 
+ * @description Cette page utilise les données de l'API ou des données mockées pour afficher
+ * différents graphiques et informations liées à un utilisateur spécifique.
+ * 
+ * @example
+ * // Exemple de route :
+ * <Route path="/dashboard/:userId" component={Dashboard} />
+ */
 
 export default function Dashboard() {
   const { userId } = useParams()
@@ -25,6 +45,10 @@ export default function Dashboard() {
   const [userPerformance, setUserPerformance] = useState(null);
   const [userNotFound, setUserNotFound] = useState(false);
 
+  /**
+   * Récupère les données utilisateur depuis l'API ou des données mockées.
+   * Affiche un message d'erreur si les données ne sont pas disponibles.
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,6 +68,8 @@ export default function Dashboard() {
     };
     fetchData();
   }, [userId]);
+
+ // Si l'utilisateur n'a pas été trouvé
   if (userNotFound) {
     return (
       <div>
@@ -58,6 +84,7 @@ export default function Dashboard() {
     );
   }
 
+ // Si les données sont en cours de chargement
   if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
     return (
       <div>
@@ -73,6 +100,7 @@ export default function Dashboard() {
     );
   }
 
+   // Affichage des données utilisateur
   return (
     <div>
       <Header />

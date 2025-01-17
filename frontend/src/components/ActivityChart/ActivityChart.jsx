@@ -1,8 +1,21 @@
+/**
+ * @file ActivityChart.jsx
+ * @description Composant React qui affiche un graphique en barres représentant l'activité quotidienne d'un utilisateur. 
+ * Ce graphique affiche les calories brûlées et le poids (en kg) pour chaque jour.
+ */
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import "./activityChart.css"
 
 
+/**
+ * Composant personnalisé pour afficher un tooltip avec les données de poids (kg) et de calories (kCal).
+ * 
+ * @param {Object} props - Propriétés du tooltip.
+ * @param {boolean} props.active - Indique si le tooltip est actif.
+ * @param {Array} props.payload - Contient les données affichées dans le tooltip.
+ * @returns {JSX.Element|null} Retourne un tooltip personnalisé ou `null` si aucune donnée n'est disponible.
+ */
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const kilogram = payload.find((item) => item.dataKey === "kilogram").value;
@@ -27,14 +40,25 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+/**
+ * Composant principal pour afficher un graphique en barres représentant l'activité quotidienne.
+ * 
+ * @param {Object} props - Propriétés du composant.
+ * @param {Array} props.data - Données représentant les sessions d'activité quotidienne.
+ * Chaque élément du tableau doit inclure `day`, `kilogram`, et `calories`.
+ * <ActivityChart data={data} />
+ * 
+ * @returns {JSX.Element} Retourne le graphique en barres.
+ */
 export default function  ActivityChart ({ data }) {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
 
+   // Prétraitement des données pour ajouter un index (numéro de jour)
   const processedData = data.map((session, index) => ({
     ...session,
-    index: index + 1, // Ajoute un numéro de jour
+    index: index + 1, 
   }));
 
   return (
@@ -79,7 +103,6 @@ export default function  ActivityChart ({ data }) {
         y={17}
         x={17}
           verticalAlign="top"
-          // className='recharts-default-legend'
           align="right"
           iconType="circle"
           wrapperStyle={{ paddingBottom: 30 }}
@@ -92,7 +115,7 @@ export default function  ActivityChart ({ data }) {
 
         {/* Tooltip personnalisé */}
         <Tooltip content={<CustomTooltip />} />
-        {/* Barres */}
+        {/* Barres du graphique */}
         <Bar 
         dataKey="kilogram" 
         fill="#282D30" 
