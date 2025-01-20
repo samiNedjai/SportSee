@@ -13,7 +13,7 @@ import App from './App.jsx'
  * `StrictMode` est utilisé pour identifier les problèmes potentiels dans l'application React.
  */
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <App />
-  </StrictMode>,
+  // </StrictMode>,
 )

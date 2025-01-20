@@ -1,6 +1,5 @@
 
 #root {
-  max-width: 1440px;
   max-height: 1024px;
   margin: 0;
   padding: 0;
@@ -11,11 +10,11 @@ body {
   margin: 0;
   padding: 0;
 }
-main {
+/* main {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
   height: 80vh;
-}
+} */
 
 

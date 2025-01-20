@@ -1,10 +1,14 @@
-/* main {
+.main {
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
-    height: calc(100vh - 91px);
-} */
- 
+    height: 100vh ;
+}
+@media screen and (max-width: 1024px) {
+    .main {
+      width: 100%;
+    }
+}
 .dashboard {
     display: flex;
     flex-flow: column nowrap;
@@ -15,7 +19,7 @@
     padding: 0px 24px 0 109px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .dashboard {
         row-gap:48px;
         padding: 80px 48px;
@@ -25,10 +29,11 @@
     display: flex;
     flex-flow: column;
     padding-top: 60px;
+    width: 100%;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .dashboard-header {
-        font-size: 48px;
+        padding: 0;
     }
 }
 .dashboard-header-greeting {
@@ -37,10 +42,22 @@
     display: flex;
     margin: 0;
 }
+@media screen and (max-width: 1024px) {
+    .dashboard-header-greeting {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+}
 
 .dashboard-header-name {
     color: #ff0101;
     display: flex;
+    margin-left: 10px;
+}
+@media screen and (max-width: 1024px) {
+    .dashboard-header-name {
+        font-size: 36px;
+    }
 }
 
 .dashboard-header-message {
@@ -54,16 +71,16 @@ text-align: start;
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .dashboard-header-message {
-        font-size: 24px;
+        font-size: 18px;
     }
 }
 
 .dashboard-charts {
     display: grid;
     width: 100%;
-    height: 70%;
+    height: 90%;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 32px;
@@ -82,9 +99,18 @@ text-align: start;
 
 .dashboard-activityChart {
     grid-area: 1 / 1 / 3 / 4;
-    height: 320px;
+    height: 340px;
 }
-
+@media screen and (max-width: 1024px) {
+    .dashboard-activityChart{
+     height: 100%;
+   
+    }
+    .dashboard-averageSession{
+         height: 100%;
+        
+}
+}
 
 .dashboard-averageSession {
     grid-area: 3 / 1 / 5 / 2;

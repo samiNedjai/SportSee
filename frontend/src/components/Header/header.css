@@ -35,3 +35,20 @@
 .header-nav-logo {
     width: 284.8px;
 }
+
+@media screen and (max-width: 1024px) {
+    .header {
+        height: 50px;
+    }
+    .header-nav {
+        width: 100%;
+    }
+    
+    .header-nav-link {
+        font-weight: 400;
+        font-size: 18px;
+    }
+    .header-nav-logo {
+        width: 115px;
+    }
+}
