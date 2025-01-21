@@ -52,11 +52,11 @@ export default function Login() {
           id="userId"
           placeholder="Entrez votre identifiant utilisateur"
           value={userId}
-          onChange={(e) => setUserId(e.target.value)} // Met à jour l'état avec la valeur saisie
+          onChange={(e) => setUserId(e.target.value)} 
           />
-        <button onClick={handleLogin}>Valider</button> {/* Bouton de validation */}
+        <button onClick={handleLogin}>Valider</button> 
       </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Message d'erreur affiché si nécessaire */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>} 
     </div>
   );
 }

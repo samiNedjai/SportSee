@@ -54,20 +54,36 @@ export default function Dashboard() {
       try {
         const userData = await fetchUserData(userId);
         if (!userData) {
+          console.error(`Utilisateur non trouvé pour l'ID ${userId}`);
           setUserNotFound(true);
-        } else {
-          setUserNotFound(false);
-          setUserData(userData);
-          setUserActivity(await fetchUserActivity(userId));
-          setUserAverageSessions(await fetchUserAverageSessions(userId));
-          setUserPerformance(await fetchUserPerformance(userId));
+          return;
         }
+        setUserNotFound(false);
+        setUserData(userData);
+  
+        const activityData = await fetchUserActivity(userId);
+        setUserActivity(activityData);
+  
+        const averageSessionsData = await fetchUserAverageSessions(userId);
+        setUserAverageSessions(averageSessionsData);
+  
+        const performanceData = await fetchUserPerformance(userId);
+        setUserPerformance(performanceData);
       } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
         setUserNotFound(true);
       }
     };
     fetchData();
   }, [userId]);
+  
+  useEffect(() => {
+    console.log("userData:", userData);
+    console.log("userActivity:", userActivity);
+    console.log("userAverageSessions:", userAverageSessions);
+    console.log("userPerformance:", userPerformance);
+  }, [userData, userActivity, userAverageSessions, userPerformance]);
+  
 
  // Si l'utilisateur n'a pas été trouvé
   if (userNotFound) {
@@ -111,7 +127,7 @@ export default function Dashboard() {
             <h1 className="dashboard-header-greeting">
               Bonjour{"   "}
               <span className="dashboard-header-name">
-                {userData.userInfos.firstName}
+                {userData.firstName}
               </span>
             </h1>
             <p className="dashboard-header-message">

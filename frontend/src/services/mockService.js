@@ -14,9 +14,13 @@ import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE 
  * @returns {Object|undefined} - Les données utilisateur correspondant à l'identifiant ou `undefined` si non trouvé.
  */
 export const fetchMockUserData = (userId) => {
-    return USER_MAIN_DATA.find((user) => user.id === userId);
-};
-
+    const user = USER_MAIN_DATA.find((user) => user.id === parseInt(userId, 10));
+    if (!user) {
+      console.warn(`Utilisateur avec l'ID ${userId} non trouvé dans les données mockées.`);
+      return null;
+    }
+    return user;
+  };
 /**
  * Récupère les activités utilisateur depuis les données mockées.
  * 
@@ -24,8 +28,13 @@ export const fetchMockUserData = (userId) => {
  * @returns {Object|undefined} - Les activités utilisateur correspondant à l'identifiant ou `undefined` si non trouvé.
  */
 export const fetchMockUserActivity = (userId) => {
-    return USER_ACTIVITY.find((activity) => activity.userId === userId);
-};
+    const activity = USER_ACTIVITY.find((activity) => activity.userId === parseInt(userId, 10));
+    if (!activity) {
+      console.warn(`Activité pour l'utilisateur avec ID ${userId} non trouvée dans les données mockées.`);
+      return null;
+    }
+    return activity;
+  };
 
 /**
  * Récupère les sessions moyennes utilisateur depuis les données mockées.
@@ -34,8 +43,14 @@ export const fetchMockUserActivity = (userId) => {
  * @returns {Object|undefined} - Les sessions moyennes utilisateur correspondant à l'identifiant ou `undefined` si non trouvé.
  */
 export const fetchMockUserAverageSessions = (userId) => {
-    return USER_AVERAGE_SESSIONS.find((sessions) => sessions.userId === userId);
-};
+    const sessions = USER_AVERAGE_SESSIONS.find((session) => session.userId === parseInt(userId, 10));
+    if (!sessions) {
+      console.warn(`Sessions moyennes pour l'utilisateur avec ID ${userId} non trouvées dans les données mockées.`);
+      return null;
+    }
+    return sessions;
+  };
+  
 
 /**
  * Récupère les performances utilisateur depuis les données mockées.
@@ -44,5 +59,11 @@ export const fetchMockUserAverageSessions = (userId) => {
  * @returns {Object|undefined} - Les performances utilisateur correspondant à l'identifiant ou `undefined` si non trouvé.
  */
 export const fetchMockUserPerformance = (userId) => {
-    return USER_PERFORMANCE.find((performance) => performance.userId === userId);
-};
+    const performance = USER_PERFORMANCE.find((performance) => performance.userId === parseInt(userId, 10));
+    if (!performance) {
+      console.warn(`Performances pour l'utilisateur avec ID ${userId} non trouvées dans les données mockées.`);
+      return null;
+    }
+    return performance;
+  };
+  

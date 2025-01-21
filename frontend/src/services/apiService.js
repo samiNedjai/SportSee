@@ -5,7 +5,7 @@
  * les sessions moyennes et les performances à partir de l'API ou des données mockées en cas d'échec.
  * 
  */
-
+import { UserData, UserActivity, UserAverageSessions, UserPerformance } from "../Models/dataModels";
 import {
   fetchMockUserData,
   fetchMockUserActivity,
@@ -28,10 +28,16 @@ export const fetchUserData = async (userId) => {
     if (!response.ok) {
       throw new Error("API request failed");
     }
-    return await response.json().then((data) => data.data);
+    const data = await response.json();
+    return new UserData(data.data);
   } catch (error) {
     console.error("Error fetching user data, falling back to mock data:", error);
-    return fetchMockUserData(parseInt(userId));
+    const mockData = fetchMockUserData(userId);
+    if (!mockData) {
+      console.error(`Aucune donnée mockée trouvée pour l'utilisateur avec ID ${userId}.`);
+      return null;
+    }
+    return new UserData(mockData);
   }
 };
 
@@ -47,10 +53,12 @@ export const fetchUserActivity = async (userId) => {
     if (!response.ok) {
       throw new Error("API request failed");
     }
-    return await response.json().then((data) => data.data);
+    const data = await response.json();
+    return new UserActivity(data.data);
   } catch (error) {
     console.error("Error fetching user activity, falling back to mock data:", error);
-    return fetchMockUserActivity(parseInt(userId));
+    const mockData = fetchMockUserActivity(userId);
+    return mockData ? new UserActivity(mockData) : null;
   }
 };
 
@@ -66,10 +74,12 @@ export const fetchUserAverageSessions = async (userId) => {
     if (!response.ok) {
       throw new Error("API request failed");
     }
-    return await response.json().then((data) => data.data);
+    const data = await response.json();
+    return new UserAverageSessions(data.data);
   } catch (error) {
     console.error("Error fetching user average sessions, falling back to mock data:", error);
-    return fetchMockUserAverageSessions(parseInt(userId));
+    const mockData = fetchMockUserAverageSessions(userId);
+    return mockData ? new UserAverageSessions(mockData) : null;
   }
 };
 
@@ -85,9 +95,11 @@ export const fetchUserPerformance = async (userId) => {
     if (!response.ok) {
       throw new Error("API request failed");
     }
-    return await response.json().then((data) => data.data);
+    const data = await response.json();
+    return new UserPerformance(data.data);
   } catch (error) {
     console.error("Error fetching user performance, falling back to mock data:", error);
-    return fetchMockUserPerformance(parseInt(userId));
+    const mockData = fetchMockUserPerformance(userId);
+    return mockData ? new UserPerformance(mockData) : null;
   }
 };
