@@ -135,6 +135,7 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="dashboard-charts">
+          <div className="containeur-chart"> 
             <div className="dashboard-activityChart dashboard-charts-all">
               <ActivityChart data={userActivity.sessions} />
             </div>
@@ -147,7 +148,8 @@ export default function Dashboard() {
             <div className="dashboard-scoreChart dashboard-charts-all">
               <ScoreChart score={userData.todayScore || userData.score} />
             </div>
-            <div className="key-data-containeur dashboard-charts-all  ">
+            </div>
+            <div className="key-data-containeur  ">
       
             <KeyData keyData={userData.keyData} />
           </div>
