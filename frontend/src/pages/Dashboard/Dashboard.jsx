@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
 import BarnavVertical from "../../components/BarnavVertical/BarnavVertical";
 import AverageSessionChart from "../../components/AverageSessionChart/AverageSessionChart"
-import Header from "../../components/Header/Header";
+import BarnavHorizontal from "../../components/BarnavHorizontal/BarnavHorizontal";
 import PerformanceRadar from "../../components/PerformanceRadar/PerformanceRadar.JSX";
 import ScoreChart from "../../components/ScoreChart/ScoreChart";
 import KeyData from "../../components/KeyData/KeyData";
@@ -89,7 +89,7 @@ export default function Dashboard() {
   if (userNotFound) {
     return (
       <div>
-        <Header />
+        <BarnavHorizontal />
         <main className="main">
           <BarnavVertical />
            <div className="error-container">
@@ -104,7 +104,7 @@ export default function Dashboard() {
   if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
     return (
       <div>
-        <Header />
+        <BarnavHorizontal />
         <main className="main">
           <BarnavVertical />
           <div className="loading-container">
@@ -119,7 +119,7 @@ export default function Dashboard() {
    // Affichage des données utilisateur
   return (
     <div>
-      <Header />
+      <BarnavHorizontal />
       <main className="main">
         <BarnavVertical />
         <section className="dashboard">

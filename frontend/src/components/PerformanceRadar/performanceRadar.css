@@ -8,3 +8,9 @@
     align-items: center;
   }
   
+  @media screen and (max-width: 1024px) {
+    .performance-radar {
+      width: 150px;
+      height: 150px;
+    }
+  }

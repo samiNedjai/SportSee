@@ -41,3 +41,13 @@
     fill: #74798C;
   }
   
+  @media screen and (max-width: 1024px) {
+    .score-chart {
+      width: 200px;
+      height: 200px;
+    }
+    .score-chart-label {
+      font-size: 12px;
+   
+    }
+  }

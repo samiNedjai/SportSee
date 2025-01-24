@@ -3,7 +3,7 @@
     flex-flow: row nowrap;
     align-items: center;
     column-gap: 24px;
-    width: 258px;
+    width: 100%;
     padding: 32px 0 32px 32px;
     background: #FBFBFB;
     border-radius: 5px;
@@ -49,4 +49,9 @@ margin: 0;
     margin: 10px 0 0 0;
     align-self: flex-start;
   }
-  
+  @media screen and (max-width: 1024px) {
+    .key-data-item {
+      height: 36px;
+      padding: 32px 0 32px 16px;
+    }
+  }

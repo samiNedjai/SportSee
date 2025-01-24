@@ -1,10 +1,9 @@
 /**
  * @file AverageSessionChart.jsx
- * @description Composant React qui affiche un graphique en courbes représentant la durée moyenne des sessions d'activité d'un utilisateur.
- * Ce graphique montre les données des sessions sur une semaine, avec des jours abrégés comme axes X.
+ * @description Composant React qui affiche un graphique en aires représentant la durée moyenne des sessions d'activité d'un utilisateur.
  */
 import React from 'react';
-import { LineChart, Line, XAxis,YAxis, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import './averageSessionChart.css';
 
 /**
@@ -18,28 +17,16 @@ import './averageSessionChart.css';
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-        <div
-          style={{
-            background: "#FFFFFF",
-            color: "#000000",
-            padding: "1em 1em",
-            textAlign: "center",
-            fontSize: "8px",
-            fontWeight: "500",
-            fontFamily: "Roboto",
-            width: "39px",
-            height: "25px"
-          }}
-        >
-          <p>{payload[0].value} min</p>
-        </div>
-      );
+      <div className="average-tooltip">
+        <p>{payload[0].value} min</p>
+      </div>
+    );
   }
   return null;
 };
 
 /**
- * Composant principal pour afficher un graphique en courbes représentant la durée moyenne des sessions.
+ * Composant principal pour afficher un graphique en aires représentant la durée moyenne des sessions.
  * 
  * @param {Object} props - Propriétés du composant.
  * @param {Array} props.data - Données des sessions d'activité.
@@ -53,30 +40,30 @@ const CustomTooltip = ({ active, payload }) => {
  * 
  * <AverageSessionChart data={data} />
  * 
- * @returns {JSX.Element} Retourne le graphique en courbes.
+ * @returns {JSX.Element} Retourne le graphique en aires.
  */
-export default function AverageSessionChart ({ data }) {
+export default function AverageSessionChart({ data }) {
   if (!data || data.length === 0) {
     return <p>Pas de données disponibles</p>;
   }
 
   // Jours abrégés pour l'axe X
-  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']; 
+  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart
+      <AreaChart
         data={data}
         margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
       >
-         {/* Gradient pour la ligne */}
+        {/* Gradient pour la zone */}
         <defs>
-          <linearGradient id="lineGradient">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="30%" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="100%" />
+          <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
           </linearGradient>
         </defs>
-          {/* Titre */}
+        {/* Titre */}
         <text
           x={10}
           y={30}
@@ -85,55 +72,44 @@ export default function AverageSessionChart ({ data }) {
             fontSize: "15px",
             fontWeight: 500,
             fill: "#FFFFFF",
-            fillOpacity: "0.5",
-           
+            fillOpacity: "0.7",
           }}
         >
           Durée moyenne des sessions
         </text>
-         {/* Axe X */}
+        {/* Axe X */}
         <XAxis
           dataKey="day"
           axisLine={false}
           tickLine={false}
-          tick={{ fill: "#FFFFFF", fillOpacity: "50%", fontSize: 12 }}
-          stroke="#FFFFFF"
+          tick={{ fill: "#FFFFFF", fillOpacity: "70%", fontSize: 12 }}
           tickMargin={10}
           tickFormatter={(day) => days[day - 1]}
         />
-         {/* Axe Y (caché) */}
+        {/* Axe Y (caché) */}
         <YAxis
           dataKey="sessionLength"
           hide={true}
-          domain={["dataMin -20", "dataMax + 50"]}
+          domain={["dataMin - 10", "dataMax + 10"]}
         />
-        {/* Ligne */}
-        <Line
+        {/* Zone */}
+        <Area
+          type="monotone"
           dataKey="sessionLength"
-          type="natural"
-          stroke="url(#lineGradient)"
-          strokeWidth={2.5}
-          dot={false}
+          stroke="url(#areaGradient)"
+          strokeWidth={2}
+          fill="url(#areaGradient)"
           activeDot={{
+            r: 5,
+            fill: "#FFFFFF",
             stroke: "#FFFFFF",
-            strokeOpacity: "50%",
-            strokeWidth: 0,
-           
+            strokeOpacity: "100%",
+            strokeWidth: 2,
           }}
         />
-         {/* Tooltip */}
-        <Tooltip
-          content={CustomTooltip}
-          cursor={{
-            stroke: "#000000",
-            strokeOpacity: "10%",
-            strokeWidth: "20%",
-            height: "100%",
-          }}
-        />
-      </LineChart>
+        {/* Tooltip */}
+        <Tooltip content={<CustomTooltip />} />
+      </AreaChart>
     </ResponsiveContainer>
   );
-};
-
-
+}
