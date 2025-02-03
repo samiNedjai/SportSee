@@ -1,8 +1,8 @@
 export const USER_MAIN_DATA = [
     {
-        id: 12,
+        id: 20,
         userInfos: {
-            firstName: 'Karl',
+            firstName: 'Sami',
             lastName: 'Dovineau',
             age: 31,
         },
@@ -33,7 +33,7 @@ export const USER_MAIN_DATA = [
 
 export const USER_ACTIVITY = [
     {
-        userId: 12,
+        userId: 20,
         sessions: [
             {
                 day: '2020-07-01',
@@ -116,7 +116,7 @@ export const USER_ACTIVITY = [
 
 export const USER_AVERAGE_SESSIONS = [
     {
-        userId: 12,
+        userId: 20,
         sessions: [
             {
                 day: 1,
@@ -185,7 +185,7 @@ export const USER_AVERAGE_SESSIONS = [
 
 export const USER_PERFORMANCE = [
     {
-        userId: 12,
+        userId: 20,
         kind: {
             1: 'cardio',
             2: 'energy',

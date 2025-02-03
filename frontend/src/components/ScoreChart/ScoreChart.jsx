@@ -32,32 +32,33 @@ export default function ScoreChart ({ score }) {
 
   return (
     <div className="score-chart">
-      <h2 className="score-chart-title">Score</h2>
+      
       <div className="score-chart-container">
+      <h2 className="score-chart-title">Score</h2>
       <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
-          innerRadius="70%"
-          outerRadius="90%"
+          innerRadius="75%"
+          outerRadius="100%"
           barSize={10}
           data={data}
           startAngle={90}
           endAngle={450} // Complète le cercle
+          background={{ fill: '#FFFFFF' }}
         >
           <PolarAngleAxis
             type="number"
             domain={[0, 100]}
             angleAxisId={0}
-            tick={false} // Masquer les ticks
+            tick={false} 
           />
           <RadialBar
-            minAngle={15}
             clockWise
             dataKey="value"
             cornerRadius={10} // Coins arrondis
           />
           <text
             x="50%"
-            y="50%"
+            y="45%"
             textAnchor="middle"
             dominantBaseline="middle"
             className="score-chart-label"
