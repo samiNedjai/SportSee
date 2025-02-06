@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
+import NotFound from './pages/NotFound/NotFound';
 
 /**
  * Composant principal de l'application.
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/" element={<Login />} />
          {/* Route pour la page Dashboard avec paramètre `userId` */}
         <Route path="/dashboard/:userId" element={<Dashboard />} />
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </Router>
   )

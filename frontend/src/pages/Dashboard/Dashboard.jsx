@@ -44,6 +44,7 @@ export default function Dashboard() {
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
   const [userNotFound, setUserNotFound] = useState(false);
+  
 
   /**
    * Récupère les données utilisateur depuis l'API ou des données mockées.
