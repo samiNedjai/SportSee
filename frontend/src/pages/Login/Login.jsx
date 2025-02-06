@@ -42,6 +42,18 @@ export default function Login() {
     }
   };
 
+   /**
+   * Gestion de la touche "Entrée".
+   * Si l'utilisateur appuie sur "Entrée", déclenche la fonction handleLogin.
+   * 
+   * @param {KeyboardEvent} e - L'événement clavier.
+   */
+   const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login-container">
       <h1>Connexion</h1>
@@ -53,6 +65,7 @@ export default function Login() {
           placeholder="Entrez votre identifiant utilisateur"
           value={userId}
           onChange={(e) => setUserId(e.target.value)} 
+          onKeyDown={handleKeyDown} 
           />
         <button onClick={handleLogin}>Valider</button> 
       </div>
