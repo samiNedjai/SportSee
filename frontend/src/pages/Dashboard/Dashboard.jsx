@@ -101,7 +101,7 @@ export default function Dashboard() {
   }
 
  // Si les données sont en cours de chargement
-  if (!userData || !userActivity || !userAverageSessions || !userPerformance) {
+  if (!userData) {
     return (
       <div>
         <BarnavHorizontal />
@@ -137,21 +137,42 @@ export default function Dashboard() {
           <div className="dashboard-charts">
           <div className="containeur-chart"> 
             <div className="dashboard-activityChart dashboard-charts-all">
+              {userActivity ? (
               <ActivityChart data={userActivity.sessions} />
+            ) : (
+              <p>Pas de données d'activité disponibles.</p>
+            )}
             </div>
             <div className="dashboard-averageSession dashboard-charts-all">
-            <AverageSessionChart data={userAverageSessions.sessions} />
+
+             {userAverageSessions ? (
+                <AverageSessionChart data={userAverageSessions.sessions} />
+              ) : (
+                <p>Pas de données de sessions moyennes disponibles.</p>
+              )}
             </div>
             <div className="dashboard-performanceRadar dashboard-charts-all">
-              <PerformanceRadar data={userPerformance} />
+            {userPerformance ? (
+                <PerformanceRadar data={userPerformance} />
+              ) : (
+                <p>Pas de données de performance disponibles.</p>
+              )}
             </div>
             <div className="dashboard-scoreChart dashboard-charts-all">
-              <ScoreChart score={userData.todayScore || userData.score} />
+            {userData.todayScore || userData.score ? (
+                <ScoreChart score={userData.todayScore || userData.score} />
+              ) : (
+                <p>Pas de données de score disponibles.</p>
+              )}
             </div>
             </div>
             <div className="key-data-containeur  ">
       
-            <KeyData keyData={userData.keyData} />
+            {userData.keyData ? (
+              <KeyData keyData={userData.keyData} />
+            ) : (
+              <p>Pas de données clés disponibles.</p>
+            )}
           </div>
           </div>
         </section>
