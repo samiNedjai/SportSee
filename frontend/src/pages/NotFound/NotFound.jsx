@@ -10,7 +10,7 @@ export default function NotFound() {
       {/* Navigation horizontale */}
       <BarnavHorizontal />
 
-      <main className="main">
+      <main className="main2">
         {/* Navigation verticale */}
         <BarnavVertical />
 
