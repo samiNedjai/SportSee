@@ -52,7 +52,8 @@ SportSee propose aux utilisateurs un tableau de bord interactif pour visualiser 
   |-- assets/            # Static images and icons
   |-- components/        # Reusable React components
   |-- data/              # Mock data
-  |-- pages/             # Page components (Dashboard, Login)
+  |-- Models/            # Format retrieved data
+  |-- pages/             # Page components (Dashboard, Login,NotFound)
   |-- services/          # API and mock data service handlers
   |-- styles/            # Global styles
   |-- App.jsx            # Root component with routing setup
@@ -72,7 +73,7 @@ SportSee propose aux utilisateurs un tableau de bord interactif pour visualiser 
 
 1. Cloner le dépôt :
    ```bash
-   git clone https://github.com/[VotreNomUtilisateurGitHub]/SportSee.git
+   git clone https://github.com/samiNedjai/SportSee.git
    cd SportSee
 
 2. Installer les dépendances :
